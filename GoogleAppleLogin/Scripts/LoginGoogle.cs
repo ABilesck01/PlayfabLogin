@@ -13,7 +13,14 @@ public class LoginGoogle : MonoBehaviour
 {
 
 #if UNITY_ANDROID
-    public static void LoginWithGoogle()
+
+    /// <summary>
+    /// Sign in PlayFab with Google account credentials.
+    /// </summary>
+    /// <param name="onLinkSuccess">gets playfab login result.</param>
+    /// <param name="onLinkError">gets playfab error message</param>
+    public static void LinkPlayfabToGoogle(System.Action<LoginResult> onLinkSuccess, 
+        System.Action<PlayFabError> onLinkError)
     {
         Social.localUser.Authenticate((bool success) =>
         {
@@ -27,11 +34,11 @@ public class LoginGoogle : MonoBehaviour
                     ServerAuthCode = serverAuthCode,
                     CreateAccount = true
 
-                }, OnMobileLoginSuccess, OnMobileLoginFailure);
+                }, onLinkSuccess, onLinkError);
             }
             else
             {
-                Debug.LogError("Erro!");
+                Debug.LogError("Error");
             }
 
         });
@@ -49,15 +56,10 @@ public class LoginGoogle : MonoBehaviour
         PlayGamesPlatform.Activate();
     }
 
+    private void Awake()
+    {
+        GoogleAwake();
+    }
+
 #endif
-
-    private static void OnMobileLoginSuccess(LoginResult result)
-    {
-
-    }
-
-    private static void OnMobileLoginFailure(PlayFabError error)
-    {
-        Debug.LogError(error.GenerateErrorReport());
-    }
 }

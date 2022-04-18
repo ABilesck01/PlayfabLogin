@@ -16,11 +16,14 @@ public class PlayFabLogin : MonoBehaviour
             */
             PlayFabSettings.staticSettings.TitleId = "";
         }
-#if UNITY_ANDROID
-        LoginGoogle.GoogleAwake();
 
-        LoginGoogle.LoginWithGoogle();
-            
+    }
+
+    private void Start()
+    {
+#if UNITY_ANDROID
+        LoginGoogle.LinkPlayfabToGoogle(onLinkSuccess, onLinkFailure);
+
 #elif UNITY_IOS
         //login.IOSAwake();
         LoginApple.AppleAwake();
@@ -39,5 +42,15 @@ public class PlayFabLogin : MonoBehaviour
     }
 
 #endif
+
+    private static void onLinkSuccess(LoginResult result)
+    {
+
+    }
+
+    private static void onLinkFailure(PlayFabError error)
+    {
+        Debug.LogError(error.GenerateErrorReport());
+    }
 
 }
