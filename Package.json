@@ -1,0 +1,14 @@
+{
+    "name": "playfabLogin",
+    "version": "1.1.0",
+    "displayName": "Playfab Sign in",
+    "description": "Use this unity package to use google or apple account to login with playfab. It is easily modifiable and will probably suit in yours needs.",
+    "unity": "2019.4",
+    "author":
+    {
+        "name": "Alex Bilesck",
+        "email": "alex.pontes@facens",
+        "url": ""
+    }
+
+}
